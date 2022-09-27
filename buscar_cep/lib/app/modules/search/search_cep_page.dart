@@ -35,11 +35,14 @@ class _SearchCepPageState extends State<SearchCepPage> {
         ),
         body: Column(
           children: [
-            Input(
-              text: "Busque por um novo Cep",
-              onChanged: (cb) {
-                  bloc.add(AddSearchEvent(cep: cb));
-                },
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Input(
+                text: "Busque por um novo Cep",
+                onChanged: (cb) {
+                    bloc.add(AddSearchEvent(cep: cb));
+                  },
+              ),
             ),
             Center(
               child: BlocBuilder<SearchBloc, SearchState>(
@@ -56,8 +59,11 @@ class _SearchCepPageState extends State<SearchCepPage> {
                     } else if (state is SearchSuccessState) {
                       final andress = state.search;
                       if (andress == null) {
-                        return const Center(
-                          child: Text("Cep não encontrado!"),
+                        return const Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: const Center(
+                            child: Text("Cep não encontrado!"),
+                          ),
                         );
                       } else {
                         return AndressCard(district: andress.bairro, locality: andress.localidade, publicPlace: andress.lougradouro, onPressed: () {  },);
